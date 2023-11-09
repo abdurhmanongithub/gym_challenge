@@ -29,9 +29,8 @@ class SplashScreen extends GetWidget<SplashController> {
                         -0.08,
                       ),
                       colors: [
-                        // ColorConstants.whiteA700,
-                        Colors.brown,
-                        Colors.brown,
+                        Color.fromRGBO(41, 40, 40, 1),
+                        Color.fromRGBO(44, 44, 44, 1)
                       ],
                     ),
                   ),

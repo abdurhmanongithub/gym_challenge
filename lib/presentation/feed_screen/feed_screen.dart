@@ -41,9 +41,8 @@ class _FeedPageState extends State<FeedPage> {
                     alignment: Alignment.bottomRight,
                     child: ConstrainedBox(
                       constraints:
-                          const BoxConstraints.expand(width: 50, height: 250),
+                          const BoxConstraints.expand(width: 50, height: 270),
                       child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           LikeButton(
                             animationDuration: const Duration(seconds: 0),
