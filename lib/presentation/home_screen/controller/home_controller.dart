@@ -5,7 +5,8 @@ class HomeController extends GetxController {
   Rx<int> currentTabIndex = 0.obs;
   Rx<bool> canShowMore = false.obs;
   Rx<bool> isMenuHidden = false.obs;
-  Rx<int?> maxLines = 4.obs;
+  Rx<bool> isExpanded = false.obs;
+  Rx<bool> isMenuOpen = false.obs;
 
   // Rx<bool> canShowMore = false.obs;
   Rx<PageController> pageController = PageController(initialPage: 0).obs;
@@ -13,12 +14,13 @@ class HomeController extends GetxController {
     return currentTabIndex == tab;
   }
 
-  setMaxLine(int val) {
-    if (val < 0) {
-      maxLines.value = null;
-    } else {
-      maxLines.value = val;
-    }
+  setIsMenuOpen(bool val) {
+    isMenuOpen.value = val;
+    update();
+  }
+
+  setIsExpanded(bool val) {
+    isExpanded.value = val;
     update();
   }
 
