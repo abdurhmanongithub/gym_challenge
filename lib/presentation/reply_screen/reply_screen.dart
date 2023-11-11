@@ -1,26 +1,26 @@
-import 'package:flutter/material.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gym/presentation/home_screen/controller/home_controller.dart';
 import 'package:gym/routes/app.dart';
 
-class CommentBottomSheet extends StatefulWidget {
-  @override
-  _CommentBottomSheetState createState() => _CommentBottomSheetState();
-}
-
-class _CommentBottomSheetState extends State<CommentBottomSheet> {
+// ignore: must_be_immutable
+class ReplyScreen extends GetWidget<HomeController> {
+  ReplyScreen({super.key});
   TextEditingController _commentController = TextEditingController();
-  getCommentSection() {
+
+  getReplySection() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Container(
+                SizedBox(
                   height: 44,
                   width: 44,
                   child: CircleAvatar(
@@ -61,120 +61,47 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
           ],
         ),
         const SizedBox(height: 8.0),
-        Text(
-          "Lorem ipsum dolor sit amet consectetur. Aliquam sagittis ullamcorper      amet justo quisque          ullamcorper volutpat. Donec feugiat diam et tellus in habitant viverra duis. ",
-          style: GoogleFonts.roboto(
-              fontWeight: FontWeight.w400,
-              fontSize: 13,
-              color: const Color.fromRGBO(118, 118, 118, 1)),
-        ),
-        const SizedBox(height: 16.0),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            GestureDetector(
-              child: Row(
+            CustomPaint(
+              size: const Size(30, 100), // Adjust line length as needed
+              painter: LinePainter(),
+            ),
+            Container(
+              constraints: BoxConstraints(maxWidth: Get.size.width * 0.8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(App.replyScreen);
-                    },
-                    child: SvgPicture.asset('assets/icons/comment_icon.svg'),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 13,
-                    ),
-                    child: Text(
-                      '15',
-                      style: GoogleFonts.roboto(
-                        // height: 2,
+                  Text(
+                    "Lorem ipsum dolor sit amet consectetur. Aliquam sagittis ullamcorper amet justo quisque ullamcorper volutpat. Donec feugiat diam et tellus in habitant viverra duis. ",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
                         fontSize: 13,
-                        color: const Color.fromRGBO(196, 196, 196, 1),
+                        color: const Color.fromRGBO(118, 118, 118, 1)),
+                  ),
+                  const SizedBox(height: 16.0),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text.rich(
+                      textAlign: TextAlign.left,
+                      TextSpan(
+                        text: 'Replying to ',
+                        children: [
+                          TextSpan(text: 'John Doe @JhontheD'),
+                        ],
                       ),
                     ),
                   )
                 ],
               ),
             ),
-            const SizedBox(
-              width: 69,
-            ),
-            GestureDetector(
-                child: Row(
-              children: [
-                SvgPicture.asset('assets/icons/heart.svg'),
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: 13,
-                  ),
-                  child: Text(
-                    '15K',
-                    style: GoogleFonts.roboto(
-                      fontSize: 13,
-                      color: const Color.fromRGBO(196, 196, 196, 1),
-                    ),
-                  ),
-                )
-              ],
-            )),
-            const SizedBox(
-              width: 69,
-            ),
-            GestureDetector(
-              child: SvgPicture.asset('assets/icons/flag.svg'),
-            )
           ],
-        ),
-        const SizedBox(height: 8.0),
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 3,
-                color: const Color.fromRGBO(254, 241, 241, 1),
-              ),
-              borderRadius: BorderRadius.circular(3),
-              color: const Color.fromRGBO(
-                250,
-                250,
-                250,
-                1,
-              ),
-            ),
-            child: Row(
-              children: [
-                Text(
-                  "View 15 Replies",
-                  style: GoogleFonts.roboto(
-                    color: const Color.fromRGBO(149, 149, 149, 1),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  // style: TextStyle(
-                  //   color: Colors.blue,
-                  //   fontWeight: FontWeight.bold,
-                  // ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                SvgPicture.asset(
-                  'assets/icons/right_arrow.svg',
-                  width: 4,
-                  height: 8,
-                )
-              ],
-            ),
-          ),
-        ),
-        SizedBox(height: 16.0),
+        )
       ],
     );
   }
 
-  getCommentInbox() {
+  getCommentInbox(context) {
     return Container(
       color: Colors.white,
       child: Row(
@@ -254,32 +181,46 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(28),
-          topRight: Radius.circular(100),
-        ),
-        border: Border.all(width: 0.5, color: Colors.white),
-      ),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) => getCommentSection(),
-              itemCount: 4,
+    return SafeArea(
+      child: Scaffold(
+        body: SafeArea(
+          maintainBottomViewPadding: true,
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset('assets/icons/back_arrow.svg'),
+                      Container(
+                        margin: const EdgeInsets.only(left: 5),
+                        child: Text(
+                          "Reply",
+                          style: GoogleFonts.roboto(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: const Color.fromRGBO(75, 75, 75, 1),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: getReplySection(),
+                ),
+                getCommentInbox(context),
+              ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            // bottom: 0,
-            child: Container(child: getCommentInbox()),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -302,5 +243,23 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
         });
       },
     );
+  }
+}
+
+class LinePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawLine(
+        Offset(size.width / 2, 0), Offset(size.width / 2, size.height), paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }
