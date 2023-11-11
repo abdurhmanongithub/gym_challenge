@@ -168,34 +168,38 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
   }
 
   getCommentInbox() {
-    return Row(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Colors.blue,
-          child: Text("C"), // Replace with current user's avatar
-        ),
-        const SizedBox(width: 8.0),
-        Expanded(
-          child: TextField(
-            controller: _commentController,
-            decoration: InputDecoration(
-              hintText: "Add a comment...",
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.emoji_emotions),
-                onPressed: () {
-                  showEmojiPicker(context);
-                },
+    return Container(
+      color: Colors.white,
+      child: Row(
+        // mainAxisSize: MainAxisSize.max,
+        children: [
+          const CircleAvatar(
+            backgroundColor: Colors.blue,
+            child: Text("C"), // Replace with current user's avatar
+          ),
+          const SizedBox(width: 8.0),
+          Expanded(
+            child: TextField(
+              controller: _commentController,
+              decoration: InputDecoration(
+                hintText: "Add a comment...",
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.emoji_emotions),
+                  onPressed: () {
+                    showEmojiPicker(context);
+                  },
+                ),
               ),
             ),
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.send),
-          onPressed: () {
-            // Handle send action
-          },
-        ),
-      ],
+          IconButton(
+            icon: const Icon(Icons.send),
+            onPressed: () {
+              // Handle send action
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -211,12 +215,22 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
         ),
         border: Border.all(width: 0.5, color: Colors.white),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemBuilder: (context, index) => getCommentSection(),
-          itemCount: 4,
-        ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (context, index) => getCommentSection(),
+              itemCount: 4,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            // bottom: 0,
+            child: Container(child: getCommentInbox()),
+          ),
+        ],
       ),
     );
   }
@@ -226,7 +240,16 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
       context: context,
       builder: (BuildContext context) {
         return EmojiPicker(onEmojiSelected: (emoji, category) {
-          _commentController.text = _commentController.text;
+          final currentText = _commentController.text;
+          final selection = _commentController.selection;
+          final newText = currentText.replaceRange(
+              selection.start, selection.end, category.emoji);
+          _commentController.value = TextEditingValue(
+            text: newText,
+            selection: TextSelection.collapsed(
+                offset: selection.start + category.emoji.length),
+          );
+          // _commentController.text = _commentController.text + category.emoji;
         });
       },
     );

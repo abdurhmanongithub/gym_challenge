@@ -52,7 +52,8 @@ class HomeScreen extends GetWidget<HomeController> {
                       child: Stack(
                         children: [
                           Visibility(
-                            visible: !controller.isMenuOpen.value,
+                            visible: !controller.isMenuHidden.value &&
+                                !controller.isMenuOpen.value,
                             child: Positioned(
                               top: 10,
                               child: GestureDetector(
@@ -65,7 +66,8 @@ class HomeScreen extends GetWidget<HomeController> {
                             ),
                           ),
                           Visibility(
-                            visible: controller.isMenuOpen.value,
+                            visible: !controller.isMenuHidden.value &&
+                                controller.isMenuOpen.value,
                             child: Positioned(
                               top: 0,
                               child: Menu(),
