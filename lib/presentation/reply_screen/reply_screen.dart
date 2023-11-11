@@ -15,86 +15,78 @@ class ReplyScreen extends GetWidget<HomeController> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  height: 44,
-                  width: 44,
-                  child: CircleAvatar(
-                    child: Image.asset(
-                        'assets/images/avator_1.png'), // Replace with avatar image
+        Container(
+          constraints: BoxConstraints(maxWidth: Get.size.width * 0.7),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RichText(
+                text: TextSpan(
+                  text: 'Kerry Johns ',
+                  style: GoogleFonts.roboto(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
                   ),
-                ),
-                const SizedBox(width: 8.0),
-                RichText(
-                  text: TextSpan(
-                      text: 'Kerry Johns ',
+                  children: [
+                    TextSpan(
+                      text: '@Kerry',
                       style: GoogleFonts.roboto(
-                        color: Colors.black,
                         fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: '@Kerry',
-                          style: GoogleFonts.roboto(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                            color: const Color.fromRGBO(92, 141, 255, 1),
-                          ),
-                        ),
-                      ]),
-                ),
-              ],
-            ),
-            Text(
-              "2 hours ago",
-              style: GoogleFonts.roboto(
-                color: const Color.fromRGBO(196, 196, 196, 1),
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8.0),
-        Row(
-          children: [
-            CustomPaint(
-              size: const Size(30, 100), // Adjust line length as needed
-              painter: LinePainter(),
-            ),
-            Container(
-              constraints: BoxConstraints(maxWidth: Get.size.width * 0.8),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Lorem ipsum dolor sit amet consectetur. Aliquam sagittis ullamcorper amet justo quisque ullamcorper volutpat. Donec feugiat diam et tellus in habitant viverra duis. ",
-                    style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        color: const Color.fromRGBO(118, 118, 118, 1)),
-                  ),
-                  const SizedBox(height: 16.0),
-                  const SizedBox(
-                    width: double.infinity,
-                    child: Text.rich(
-                      textAlign: TextAlign.left,
-                      TextSpan(
-                        text: 'Replying to ',
-                        children: [
-                          TextSpan(text: 'John Doe @JhontheD'),
-                        ],
+                        color: const Color.fromRGBO(92, 141, 255, 1),
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
+              ),
+              Text(
+                "2 hours ago",
+                style: GoogleFonts.roboto(
+                  color: const Color.fromRGBO(196, 196, 196, 1),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8.0),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              constraints: BoxConstraints(maxWidth: Get.size.width * 0.7),
+              child: Text(
+                "Lorem ipsum dolor sit amet consectetur. Aliquam sagittis ullamcorper amet justo quisque ullamcorper volutpat. Donec feugiat diam et tellus in habitant viverra duis. ",
+                style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                    color: const Color.fromRGBO(118, 118, 118, 1)),
               ),
             ),
+            const SizedBox(height: 16.0),
+            Container(
+              width: Get.size.width * 0.7,
+              constraints: BoxConstraints(maxWidth: Get.size.width * 0.9),
+              // width: double.infinity,
+              // color: Colors.blue,
+              child: Text.rich(
+                textAlign: TextAlign.left,
+                TextSpan(
+                  text: 'Replying to ',
+                  style: GoogleFonts.roboto(fontWeight: FontWeight.w500),
+                  children: [
+                    TextSpan(
+                      text: 'John Doe @JhontheD',
+                      style: GoogleFonts.roboto(
+                        color: Colors.amber,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         )
       ],
@@ -105,7 +97,6 @@ class ReplyScreen extends GetWidget<HomeController> {
     return Container(
       color: Colors.white,
       child: Row(
-        // mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             height: 44,
@@ -122,7 +113,7 @@ class ReplyScreen extends GetWidget<HomeController> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(right: 10),
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 0),
               child: TextField(
                 controller: _commentController,
                 decoration: InputDecoration(
@@ -168,12 +159,6 @@ class ReplyScreen extends GetWidget<HomeController> {
               ),
             ),
           ),
-          // IconButton(
-          //   icon: const Icon(Icons.send),
-          //   onPressed: () {
-          //     // Handle send action
-          //   },
-          // ),
         ],
       ),
     );
@@ -212,9 +197,34 @@ class ReplyScreen extends GetWidget<HomeController> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: getReplySection(),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 44,
+                          width: 44,
+                          child: CircleAvatar(
+                            child: Image.asset(
+                                'assets/images/avator_1.png'), // Replace with avatar image
+                          ),
+                        ),
+                        CustomPaint(
+                          size: const Size(
+                              30, 70), // Adjust line length as needed
+                          painter: LinePainter(),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: getReplySection(),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 getCommentInbox(context),
               ],
