@@ -173,31 +173,73 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
       child: Row(
         // mainAxisSize: MainAxisSize.max,
         children: [
-          const CircleAvatar(
-            backgroundColor: Colors.blue,
-            child: Text("C"), // Replace with current user's avatar
+          Container(
+            height: 44,
+            width: 44,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              image: const DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/commentor.png'),
+              ),
+            ),
           ),
           const SizedBox(width: 8.0),
           Expanded(
-            child: TextField(
-              controller: _commentController,
-              decoration: InputDecoration(
-                hintText: "Add a comment...",
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.emoji_emotions),
-                  onPressed: () {
-                    showEmojiPicker(context);
-                  },
+            child: Container(
+              margin: const EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: TextField(
+                controller: _commentController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(34),
+                    borderSide: const BorderSide(
+                      color: Color.fromRGBO(
+                        196,
+                        196,
+                        196,
+                        1,
+                      ),
+                    ),
+                  ),
+                  hintText: "Add  comment",
+                  prefixIconConstraints: const BoxConstraints(
+                    maxHeight: 35,
+                    // maxWidth: 30,
+                  ),
+                  prefixIcon: GestureDetector(
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        left: 5,
+                        right: 5,
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/icons/emoji.svg',
+                      ),
+                    ),
+                    onTap: () {
+                      showEmojiPicker(context);
+                    },
+                  ),
+                  suffixIconConstraints: const BoxConstraints(
+                    maxHeight: 24,
+                  ),
+                  suffixIcon: GestureDetector(
+                    child: Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        child: SvgPicture.asset('assets/icons/send_icon.svg')),
+                  ),
                 ),
               ),
             ),
           ),
-          IconButton(
-            icon: const Icon(Icons.send),
-            onPressed: () {
-              // Handle send action
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.send),
+          //   onPressed: () {
+          //     // Handle send action
+          //   },
+          // ),
         ],
       ),
     );
