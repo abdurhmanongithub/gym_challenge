@@ -56,6 +56,7 @@ class HomeScreen extends GetWidget<HomeController> {
                                 !controller.isMenuOpen.value,
                             child: Positioned(
                               top: 10,
+                              left: 20,
                               child: GestureDetector(
                                 onTap: () {
                                   controller.setIsMenuOpen(true);

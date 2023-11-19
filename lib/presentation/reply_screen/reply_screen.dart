@@ -100,8 +100,8 @@ class ReplyScreen extends GetWidget<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 44,
-            width: 44,
+            height: 52,
+            width: 52,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               image: const DecorationImage(
@@ -137,8 +137,8 @@ class ReplyScreen extends GetWidget<HomeController> {
                   prefixIcon: GestureDetector(
                     child: Container(
                       margin: const EdgeInsets.only(
-                        left: 5,
-                        right: 5,
+                        left: 14,
+                        right: 10,
                       ),
                       child: SvgPicture.asset(
                         'assets/icons/emoji.svg',
