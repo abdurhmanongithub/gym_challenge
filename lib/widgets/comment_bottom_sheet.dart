@@ -255,8 +255,10 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        top: 0,
+      ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(28),
@@ -266,8 +268,35 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
       ),
       child: Stack(
         children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              padding: EdgeInsets.only(),
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(95, 99, 104, 1),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                ),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12.89, vertical: 13),
+                child: Text(
+                  '45K Comments',
+                  style: GoogleFonts.roboto(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12.89,
+                    fontStyle: FontStyle.normal,
+                  ),
+                ),
+              ),
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding:
+                const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 16),
             child: ListView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) => getCommentSection(),
