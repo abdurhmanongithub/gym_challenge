@@ -97,12 +97,12 @@ class ReplyScreen extends GetWidget<HomeController> {
     return Container(
       color: Colors.white,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 48,
-            width: 48,
+            height: 44,
+            width: 44,
             decoration: BoxDecoration(
-              color: Colors.blue,
               borderRadius: BorderRadius.circular(50),
               image: const DecorationImage(
                 fit: BoxFit.cover,
@@ -113,9 +113,7 @@ class ReplyScreen extends GetWidget<HomeController> {
           const SizedBox(width: 8.0),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.only(
-                right: 10,
-              ),
+              margin: const EdgeInsets.only(right: 10),
               padding: const EdgeInsets.symmetric(vertical: 0),
               child: TextField(
                 controller: _commentController,
